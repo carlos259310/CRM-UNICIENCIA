@@ -1,4 +1,5 @@
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Product } from '@/types/Products';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
@@ -20,13 +21,13 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: '/products',
     },
 ];
-
+/*
 interface Product {
     id: number,
     name: string,
     price: number,
     description: string,
-}
+}*/
 
 interface PageProps {
     flash: {
@@ -37,7 +38,7 @@ interface PageProps {
 
 export default function Index() {
 
-    const { products, flash } = usePage().props as PageProps;
+    const { products, flash } = usePage().props as unknown as PageProps;
 
     const {processing, delete: destroy} = useForm();
 
@@ -86,10 +87,21 @@ export default function Index() {
                                     <TableCell>{product.name}</TableCell>
                                     <TableCell>{product.price}</TableCell>
                                     <TableCell>{product.description}</TableCell>
-                                    <TableCell className="text-center space-x-2">
-                                        <Link href={route('products.edit', product.id)}><Button className="bg-slate-600 hover:bg-slate-700">Edit</Button></Link>
-                                        <Button disabled={processing} onClick={() => handleDelete(product.id, product.name)} className="bg-red-500 hover:bg-red-700">Delete</Button>
-                                    </TableCell>
+                        <TableCell className="text-center space-x-2">
+  <Link href={route('products.show', product.id)}>
+        <Button className="bg-blue-500 hover:bg-blue-700">View</Button>
+    </Link>
+    <Link href={route('products.edit', product.id)}>
+        <Button className="bg-slate-600 hover:bg-slate-700">Edit</Button>
+    </Link>
+    <Button
+        disabled={processing}
+        onClick={() => handleDelete(product.id, product.name)}
+        className="bg-red-500 hover:bg-red-700"
+    >
+        Delete
+    </Button>
+</TableCell>
                                 </TableRow>
                             ))}
                            

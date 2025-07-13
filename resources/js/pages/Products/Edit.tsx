@@ -1,4 +1,5 @@
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Product } from '@/types/Products';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -7,13 +8,14 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { CircleAlert } from 'lucide-react';
-
+/*
 interface Product{
     id: number,
     name: string,
     description: string,
     price: number,
 }
+    */
 
 interface Props {
     product: Product
@@ -62,7 +64,7 @@ export default function Edit({product} : Props) {
                     </div>
                     <div className='gap-1.5'>
                         <Label htmlFor="product price">Price</Label>
-                        <Input placeholder="Price" value={data.price} onChange={(e) => setData('price', e.target.value)}></Input>
+                        <Input placeholder="Price" value={data.price} onChange={(e) => setData('price', Number(e.target.value))}></Input>
                     </div>
                     <div className='gap-1.5'>
                         <Label htmlFor="product description">Description</Label>
